@@ -1,7 +1,7 @@
 "use server";
 
 import { StatusEnum, StatusEnumType } from "./statusEnu";
-import puppeteer, { Browser } from "puppeteer";
+import puppeteer, { Browser } from "puppeteer-core";
 
 export async function getStatus(): Promise<{
 	status: StatusEnumType;
