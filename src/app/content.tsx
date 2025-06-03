@@ -15,6 +15,7 @@ export default function Content({ status, htmlContent }: Props) {
 
 	return (
 		<div>
+			<h1>✨お仕事状況✨</h1>
 			<p>{label}</p>
 			<p>{htmlContent}</p>
 		</div>
