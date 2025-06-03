@@ -3,7 +3,10 @@
 import { StatusEnum, StatusEnumType } from "./statusEnu";
 import puppeteer, { Browser } from "puppeteer";
 
-export async function getStatus(): Promise<StatusEnumType> {
+export async function getStatus(): Promise<{
+	status: StatusEnumType;
+	htmlContent: string;
+}> {
 	const envUrl = process.env.SITE_URL;
 	if (!envUrl) throw new Error("SITE_URL is not set");
 
@@ -97,10 +100,16 @@ export async function getStatus(): Promise<StatusEnumType> {
 		console.log(htmlContent);
 		const isOffline = htmlContent.includes("オフライン");
 
-		return isOffline ? StatusEnum.OFFLINE : StatusEnum.ONLINE;
+		return {
+			status: isOffline ? StatusEnum.OFFLINE : StatusEnum.ONLINE,
+			htmlContent,
+		};
 	} catch (error) {
 		console.error("Error fetching status with headless browser:", error);
-		return StatusEnum.ERROR;
+		return {
+			status: StatusEnum.ERROR,
+			htmlContent: "",
+		};
 	} finally {
 		if (browser) {
 			await browser.close();

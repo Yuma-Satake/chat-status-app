@@ -2,9 +2,10 @@ import { StatusEnum, StatusEnumType } from "./statusEnu";
 
 type Props = {
 	status: StatusEnumType;
+	htmlContent: string;
 };
 
-export default function Content({ status }: Props) {
+export default function Content({ status, htmlContent }: Props) {
 	const label =
 		status === StatusEnum.ONLINE
 			? "お仕事中だよ"
@@ -15,6 +16,7 @@ export default function Content({ status }: Props) {
 	return (
 		<div>
 			<p>{label}</p>
+			<p>{htmlContent}</p>
 		</div>
 	);
 }
